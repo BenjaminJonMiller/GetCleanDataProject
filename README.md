@@ -1,52 +1,67 @@
 GetCleanDataProject
 ===================
-#set working directory where smartphone fit data are located
-setwd("C:/Users/Benjamin/Coursera/DataScience/GettingAndCleaningData/CourseProject/UCI HAR Dataset")
+#Macro steps for cleaning smartphone fit data...
+1. Download course project data and move to GettingAndCleaningData directory
+2. Set working directory where smartphone fit data are located
+3. Read data into R from train and test sets
+4. Create data frame that includes all test data, subjects and activities called testdf
+5. Name testdf columns using values from features.txt
+6. Create data frame that includes all training data, subjects and activities called traindf and merge with testdf to create masterdf
+7. Get activity labels and name the activities in the dataset with the descriptors instead of integer codes
+8. Extract only the measurements on the mean and standard deviation for each measurement by pattern matching and creates new data frame called df4
+9. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-#read data into R from train and test sets
-#trainX <- read.table("./train/X_train.txt")
-#trainY <- read.table("./train/y_train.txt")
-#trainSub <- read.table("./train/subject_train.txt")
-#testX <- read.table("./test/X_test.txt")
-#testY <- read.table("./test/y_test.txt")
-#testSub <- read.table("./test/subject_test.txt")
+#From original raw data, a README.txt file was included.  Below is a copy of that information
+==================================================================
+Human Activity Recognition Using Smartphones Dataset
+Version 1.0
+==================================================================
+Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
+Smartlab - Non Linear Complex Systems Laboratory
+DITEN - Università degli Studi di Genova.
+Via Opera Pia 11A, I-16145, Genoa, Italy.
+activityrecognition@smartlab.ws
+www.smartlab.ws
+==================================================================
 
-#create data frame that includes all test data, subjects and activities 
-#called testdf
-testdf <- data.frame(matrix(nrow = 2947, ncol = 3))
-testdf$X1 <- "Test"
-testdf$X2 <- testSub[[1]]
-testdf$X3 <- testY[[1]]
-testdf <- cbind(testdf, testX)
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
-#name testdf columns using values from features.txt
-features <- read.table("./features.txt")
-featurenames <- as.character(features[[2]])
-colnames(testdf) <- c("TestOrTrain", "Subject", "Activity", featurenames)
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
 
-#create data frame that includes all training data, subjects and activities 
-#called traindf and merge with testdf to create masterdf
-traindf <- data.frame(matrix(nrow = 7352, ncol = 3))
-traindf$X1 <- "Train"
-traindf$X2 <- trainSub[[1]]
-traindf$X3 <- trainY[[1]]
-traindf <- cbind(traindf, trainX)
-colnames(traindf) <- c("TestOrTrain", "Subject", "Activity", featurenames)
-masterdf <- rbind(testdf, traindf)
+For each record it is provided:
+======================================
 
-#get activity labels and name the activities in the dataset with the descriptors
-#instead of integer codes
-activityfile <- read.table("./activity_labels.txt")
-activities <- activityfile$V2
-activities <- as.character(activities)
-activitycodes <- masterdf$Activity
-for (i in 1:nrow(masterdf)) {
-      masterdf$Activity[i] <- activities[activitycodes[i]]
-}
+- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
+- Triaxial Angular velocity from the gyroscope. 
+- A 561-feature vector with time and frequency domain variables. 
+- Its activity label. 
+- An identifier of the subject who carried out the experiment.
 
-#Extract only the measurements on the mean and standard deviation 
-#for each measurement by pattern matching and creates new data frame
-#called df4
-df2 <- masterdf[, grep("mean|std", colnames(masterdf), ignore.case = T)]
-df3 <- masterdf[,1:3]
-df4 <- cbind(df3, df2)
+The dataset includes the following files:
+=========================================
+
+- 'README.txt'
+
+- 'features_info.txt': Shows information about the variables used on the feature vector.
+
+- 'features.txt': List of all features.
+
+- 'activity_labels.txt': Links the class labels with their activity name.
+
+- 'train/X_train.txt': Training set.
+
+- 'train/y_train.txt': Training labels.
+
+- 'test/X_test.txt': Test set.
+
+- 'test/y_test.txt': Test labels.
+
+The following files are available for the train and test data. Their descriptions are equivalent. 
+
+- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
+
+- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
+
+- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
