@@ -2,29 +2,44 @@
 #Code book that describes the variables, the data, and any transformations or work that were performed to clean up the data
 =======================
 #Script Variables
-TRAINING DATA
-trainX: incoming training dataset that has 561 variables and 7352 observations without headers
-trainY: incoming training activity dataset that has 1 variable and 7352 observations without headers.  Data are integer codes representing a specific activity
+TRAINING DATA 
+
+trainX: incoming training dataset that has 561 variables and 7352 observations without headers 
+
+trainY: incoming training activity dataset that has 1 variable and 7352 observations without headers.  Data are integer codes representing a specific activity 
+
 trainSub: incoming subject id dataset that has one id variable and 7352 observations.  Subject id's 1:30
 
-TEST DATA
-testX: incoming training dataset that has 561 variables and 2947 observations without headers
-testY: incoming training activity dataset that has 1 variable and 2947 observations without headers.  Data are integer codes      representing a specific activity
+TEST DATA 
+
+testX: incoming training dataset that has 561 variables and 2947 observations without headers 
+
+testY: incoming training activity dataset that has 1 variable and 2947 observations without headers.  Data are integer codes      representing a specific activity 
+
 testSub: incoming subject id dataset that has one id variable and 2947 observations.  Subject id's 1:30
 
-DATA FRAMES
+DATA FRAMES 
+
 testdf: test data labeled with feature headers, which are the variables measured during testing.  The activity codes (1-6) were replaced with the corresponding activity descriptor.  An additional variable "TestOrTrain" was added for each observation.  The TestOrTrain column data were populated with the character "Test"
+
 traindf: training data labeled with feature headers, which are the variables measured during testing.  The activity codes (1-6) were replaced with the corresponding activity descriptor.  An additional variable "TestOrTrain" was added for each observation.  The TestOrTrain column data were populated with the character "Train"
+
 masterdf:  addition of traindf to end of testdf by rbind.  This created a master data frame with 564 variables and 10299 observations
+
 df2: subset of masterdf where only the columns that contain mean or standard deviation measuremenst were included
+
 df3: subset of first three columns of masterdf, which include TestOrTrain, Subject, and Activity data
+
 df4: merge of df2 and df3 by cbind
 
 
 #masterdf variables
 TestOrTrain: categorical variable indicating Test or Train
+
 Subject: Subject ID (1-30)
+
 Activity: categorical variable indicating activity being performed 6 categories
+
 Columns 4-564:  see following features information from features_info.txt
 
 Feature Selection 
