@@ -1,6 +1,9 @@
 ##CodeBook
 #Code book that describes the variables, the data, and any transformations or work that were performed to clean up the data
 =======================
+#Link to original incoming data
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
 #Script Variables
 TRAINING DATA 
 
