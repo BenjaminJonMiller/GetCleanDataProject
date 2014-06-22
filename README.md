@@ -10,6 +10,7 @@ GetCleanDataProject
 7. Get activity labels and name the activities in the dataset with the descriptors instead of integer codes
 8. Extract only the measurements on the mean and standard deviation for each measurement by pattern matching and creates new data frame called df4
 9. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+10. Names variables of tidy data set
 
 #From original raw data, a README.txt file was included.  Below is a copy of that information
 ==================================================================
