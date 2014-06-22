@@ -11,6 +11,10 @@ GetCleanDataProject
 8. Extract only the measurements on the mean and standard deviation for each measurement by pattern matching and creates new data frame called df4
 9. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 10. Names variables of tidy data set
+11. Tidy dataset is "tidy" by the following justification
+12.   One variable per column
+13.   One observation per row
+14.   table of tidy data only contains means of all quantitative variables
 
 #From original raw data, a README.txt file was included.  Below is a copy of that information
 ==================================================================
