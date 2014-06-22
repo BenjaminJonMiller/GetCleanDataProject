@@ -35,6 +35,12 @@ df3: subset of first three columns of masterdf, which include TestOrTrain, Subje
 
 df4: merge of df2 and df3 by cbind
 
+df5: df4 in order of subject and activity
+
+tidydf: data frame that includes the average values for all the mean and standard deviation variables broken down by subject and activity
+
+tempdf: placeholder for growing tidydf
+
 
 #masterdf variables
 TestOrTrain: categorical variable indicating Test or Train
